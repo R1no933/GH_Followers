@@ -8,7 +8,7 @@
 import UIKit
 
 //MARK: - Protocols
-protocol FollowerListViewControllerDelegate: class {
+protocol FollowerListViewControllerDelegate: AnyObject {
     func didRequestFollowers(with username: String)
 }
 
@@ -49,6 +49,9 @@ class FollowerListViewController: UIViewController {
     private func configure() {
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addbuttonTap))
+        navigationItem.rightBarButtonItem = addButton
     }
     
     //Configure search controller
@@ -113,6 +116,37 @@ class FollowerListViewController: UIViewController {
         followerCollectionView.delegate = self
         followerCollectionView.backgroundColor = .systemBackground
         followerCollectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.identifier)
+    }
+    
+    //MARK: - Objc methods
+    @objc func addbuttonTap() {
+        showLoadingView()
+        
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+            guard let self = self else { return }
+            
+            self.dismissLoadingView()
+            
+            switch result {
+            case .success(let user):
+                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+                
+                PersistanceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+                    guard let self = self else { return }
+                    
+                    guard let error = error else {
+                        self.presentAlertOnMainThread(title: "Готово!🫡", message: "Пользователь успешно добавлен в избранное.🥳", buttonTitle: "Отлично!")
+                        return
+                    }
+                    
+                    self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно")
+
+                }
+            
+            case .failure(let error):
+                self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно")
+            }
+        }
     }
 }
 

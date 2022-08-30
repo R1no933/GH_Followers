@@ -13,6 +13,8 @@
 		B7E5E76F28BBE41B003A8877 /* GHFFollowersItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5E76E28BBE41B003A8877 /* GHFFollowersItemViewController.swift */; };
 		B7E5E77228BBE80C003A8877 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5E77128BBE80C003A8877 /* Date+Ext.swift */; };
 		B7E5E77428BBE849003A8877 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5E77328BBE849003A8877 /* String+Ext.swift */; };
+		B7E5E77628BC9626003A8877 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5E77528BC9626003A8877 /* PersistanceManager.swift */; };
+		B7E5E77828BE0095003A8877 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5E77728BE0095003A8877 /* FavoriteCell.swift */; };
 		B7EC1E1028B8A4470049069E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC1E0F28B8A4470049069E /* AppDelegate.swift */; };
 		B7EC1E1228B8A4470049069E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC1E1128B8A4470049069E /* SceneDelegate.swift */; };
 		B7EC1E1428B8A4470049069E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EC1E1328B8A4470049069E /* SearchViewController.swift */; };
@@ -46,6 +48,8 @@
 		B7E5E76E28BBE41B003A8877 /* GHFFollowersItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFFollowersItemViewController.swift; sourceTree = "<group>"; };
 		B7E5E77128BBE80C003A8877 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		B7E5E77328BBE849003A8877 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		B7E5E77528BC9626003A8877 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		B7E5E77728BE0095003A8877 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		B7EC1E0C28B8A4470049069E /* GH_Followers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GH_Followers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7EC1E0F28B8A4470049069E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7EC1E1128B8A4470049069E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				B7EC1E4228B905020049069E /* NetworkManager.swift */,
+				B7E5E77528BC9626003A8877 /* PersistanceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				B7EC1E4828BA28030049069E /* FollowerCell.swift */,
+				B7E5E77728BE0095003A8877 /* FavoriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				B7EC1E4128B8FBBC0049069E /* User.swift in Sources */,
 				B7EC1E1428B8A4470049069E /* SearchViewController.swift in Sources */,
 				B7EC1E1028B8A4470049069E /* AppDelegate.swift in Sources */,
+				B7E5E77628BC9626003A8877 /* PersistanceManager.swift in Sources */,
 				B7EC1E2628B8B3DD0049069E /* FavoritesListViewController.swift in Sources */,
 				B7EC1E2928B8BB980049069E /* GHFButton.swift in Sources */,
 				B7E5E76928BBC5F1003A8877 /* GHFItemInfoView.swift in Sources */,
@@ -363,6 +370,7 @@
 				B7EC1E5328BB57570049069E /* UserInfoViewController.swift in Sources */,
 				B7EC1E5728BBABD80049069E /* GHFSecondaryTitleLabel.swift in Sources */,
 				B7EC1E3828B8E78D0049069E /* GHFAllertViewController.swift in Sources */,
+				B7E5E77828BE0095003A8877 /* FavoriteCell.swift in Sources */,
 				B7EC1E2F28B8DC2F0049069E /* FollowerListViewController.swift in Sources */,
 				B7EC1E5528BBAB2B0049069E /* GHFUserInfoHeaderViewController.swift in Sources */,
 			);
