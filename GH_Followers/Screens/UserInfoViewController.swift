@@ -8,7 +8,7 @@
 import UIKit
 
 //MARK: - Protocols
-protocol UserInfoViewControllerDelegate: class {
+protocol UserInfoViewControllerDelegate: AnyObject {
     func didTapedShowProfile(for user: User)
     func didTapedShowFollowers(for user: User)
 }
