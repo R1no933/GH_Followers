@@ -87,9 +87,7 @@ extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegat
     // Delegate for tap on user cell & show his followers
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favorite = favorites[indexPath.row]
-        let userFollowersViewController = FollowerListViewController()
-        userFollowersViewController.username = favorite.login
-        userFollowersViewController.title = favorite.login
+        let userFollowersViewController = FollowerListViewController(username: favorite.login)
         
         navigationController?.pushViewController(userFollowersViewController, animated: true)
     }
