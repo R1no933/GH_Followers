@@ -19,6 +19,7 @@ class NetworkManager {
     private init() {}
     
     //MARK: - Get methods
+    //Get followers list
     func getFollowers(for username: String, page: Int, completed: @escaping(Result<[Follower], GHFError>) -> Void) {
         let endpointUrl = baseUrl + "users/\(username)/followers?per_page=\(NetworkManager.usersPerPage)&page=\(page)"
         
@@ -57,6 +58,7 @@ class NetworkManager {
         task.resume()
     }
     
+    //Get user info
     func getUserInfo(for username: String, completed: @escaping(Result<User, GHFError>) -> Void) {
         let endpointUrl = baseUrl + "users/\(username)"
         
@@ -84,12 +86,44 @@ class NetworkManager {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.dateDecodingStrategy = .iso8601
                 let user = try decoder.decode(User.self, from: data)
                 completed(.success(user))
             } catch  {
                 completed(.failure(.invalidData))
             }
 
+        }
+        
+        task.resume()
+    }
+    
+    //Download avatar image
+    func downloadImage(from urlString: String, completed: @escaping (UIImage?) -> Void) {
+        let cacheKey = NSString(string: urlString)
+        if let image = cache.object(forKey: cacheKey) {
+            completed(image)
+            return
+        }
+        
+        guard let url = URL(string: urlString) else {
+            completed(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, responce, error in
+            guard let self = self,
+                error == nil,
+                let responce = responce as? HTTPURLResponse, responce.statusCode == 200,
+                let data = data,
+                let image = UIImage(data: data) else {
+                
+                    completed(nil)
+                    return
+            }
+            
+            self.cache.setObject(image, forKey: cacheKey)
+            completed(image)
         }
         
         task.resume()

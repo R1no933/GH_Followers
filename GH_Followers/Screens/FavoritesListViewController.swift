@@ -7,13 +7,12 @@
 
 import UIKit
 
-class FavoritesListViewController: UIViewController {
+class FavoritesListViewController: GHFDataLoadingViewController {
     
     //MARK: - Properties
     let tableView = UITableView()
     var favorites: [Follower] = []
     
-    //MARK: - Inits
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

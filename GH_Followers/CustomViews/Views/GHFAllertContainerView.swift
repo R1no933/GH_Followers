@@ -1,18 +1,14 @@
 //
-//  GHFAvataImageView.swift
+//  GHFAllertContainerView.swift
 //  GH_Followers
 //
-//  Created by Dmitriy Baskakov on 27.08.2022.
+//  Created by Dmitriy Baskakov on 31.08.2022.
 //
 
 import UIKit
 
-class GHFAvataImageView: UIImageView {
-    
-    //MARK: - Properties
-    let placeholderImage = UIImage(named: "avatar-placeholder")
-    let cache = NetworkManager.shared.cache
-    
+class GHFAllertContainerView: UIView {
+
     //MARK: - Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,11 +20,11 @@ class GHFAvataImageView: UIImageView {
     }
     
     //MARK: - Methods
-    //Configure view
     private func configure() {
-        layer.cornerRadius = 10
-        clipsToBounds = true
-        image = placeholderImage
+        backgroundColor = .systemBackground
+        layer.cornerRadius = 15
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.white.cgColor
         translatesAutoresizingMaskIntoConstraints = false
     }
 }
