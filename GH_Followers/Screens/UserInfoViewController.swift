@@ -75,7 +75,7 @@ class UserInfoViewController: UIViewController {
         self.add(childViewController: repoInfoViewController, on: self.firstItemsView)
         self.add(childViewController: followersItemViewCOntroller, on: self.secondItemsView)
         self.add(childViewController: GHFUserInfoHeaderViewController(user: user), on: self.headerView)
-        self.dateLabel.text = "Since at: \(user.createdAt.convertToDisplayFormat())"
+        self.dateLabel.text = "Since at: \(user.createdAt.convertDateToString() )"
     }
     
     //Layouts user info screen
