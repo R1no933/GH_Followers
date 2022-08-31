@@ -36,7 +36,6 @@ class GHFTextField: UITextField {
         autocorrectionType = .no
         placeholder = "Кого ищем?"
         returnKeyType = .search
-        clearButtonMode = .whileEditing
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

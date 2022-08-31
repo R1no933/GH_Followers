@@ -10,7 +10,7 @@ import UIKit
 class GHFAvataImageView: UIImageView {
     
     //MARK: - Properties
-    let placeholderImage = Images.avatarPlaceholder
+    let placeholderImage = UIImage(named: "avatar-placeholder")
     let cache = NetworkManager.shared.cache
     
     //MARK: - Inits
