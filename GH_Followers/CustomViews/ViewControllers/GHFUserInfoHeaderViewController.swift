@@ -38,9 +38,18 @@ class GHFUserInfoHeaderViewController: UIViewController {
     }
     
     //MARK: - Methods
+    //Download avatar image
+    private func downloadAvatarImage() {
+        NetworkManager.shared.downloadImage(from: user.avatarUrl) { [weak self] image in
+            guard let self = self else { return }
+            DispatchQueue.main.async { self.avatarImageView.image = image }
+        }
+    }
+    
     //Configure UI elements
     private func configure() {
-        avatarImageView.downloadImage(from: user.avatarUrl)
+        downloadAvatarImage()
+        
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? "Имя не указано"
         locationLabel.text = user.location ?? "Локация не указана"

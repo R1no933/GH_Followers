@@ -30,28 +30,14 @@ class SearchViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    //MARK: - Dismiss keyboard for tap anywhere
+    //MARK: - Methods
+    //Dismiss keyboard for tap anywhere
     func dismissKeyboardForTap() {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
     }
     
-    //MARK: - Objc funcs
-    @objc func pushFolloweListViewControlloer() {
-        guard isUserNameEnterted else {
-            presentAlertOnMainThread(
-                title: "Введите имя пользователя!",
-                message: "Введите имя пользователя! Мы же должны знать, кого искать 🤓.",
-                buttonTitle: "Понятно")
-            return
-        }
-        let followerListViewController = FollowerListViewController()
-        followerListViewController.username = userNameTextField.text
-        followerListViewController.title = userNameTextField.text
-        navigationController?.pushViewController(followerListViewController, animated: true)
-    }
-    
-    //MARK: - Layouts
+    //Layouts
     private func configureLogoImageView() {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -88,6 +74,21 @@ class SearchViewController: UIViewController {
             getFollowersButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             getFollowersButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+    
+    //MARK: - Objc funcs
+    @objc func pushFolloweListViewControlloer() {
+        guard isUserNameEnterted else {
+            presentAlertOnMainThread(
+                title: "Введите имя пользователя!",
+                message: "Введите имя пользователя! Мы же должны знать, кого искать 🤓.",
+                buttonTitle: "Понятно")
+            return
+        }
+        let followerListViewController = FollowerListViewController()
+        followerListViewController.username = userNameTextField.text
+        followerListViewController.title = userNameTextField.text
+        navigationController?.pushViewController(followerListViewController, animated: true)
     }
 }
 
