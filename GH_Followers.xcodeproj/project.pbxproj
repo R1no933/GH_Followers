@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B733498328BF75E900633799 /* GHFAllertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B733498228BF75E900633799 /* GHFAllertContainerView.swift */; };
 		B733498528BF82C900633799 /* GHFDataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B733498428BF82C900633799 /* GHFDataLoadingViewController.swift */; };
+		B733498828BF8E8000633799 /* GHFTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B733498728BF8E8000633799 /* GHFTabBarController.swift */; };
+		B733498A28BF8EEF00633799 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B733498928BF8EEF00633799 /* Constants.swift */; };
 		B7E5E76928BBC5F1003A8877 /* GHFItemInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5E76828BBC5F1003A8877 /* GHFItemInfoView.swift */; };
 		B7E5E76B28BBDCA3003A8877 /* GHFItemInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5E76A28BBDCA3003A8877 /* GHFItemInfoViewController.swift */; };
 		B7E5E76D28BBE0A6003A8877 /* GHFReposeItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E5E76C28BBE0A6003A8877 /* GHFReposeItemViewController.swift */; };
@@ -45,6 +47,8 @@
 /* Begin PBXFileReference section */
 		B733498228BF75E900633799 /* GHFAllertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFAllertContainerView.swift; sourceTree = "<group>"; };
 		B733498428BF82C900633799 /* GHFDataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFDataLoadingViewController.swift; sourceTree = "<group>"; };
+		B733498728BF8E8000633799 /* GHFTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFTabBarController.swift; sourceTree = "<group>"; };
+		B733498928BF8EEF00633799 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B7E5E76828BBC5F1003A8877 /* GHFItemInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFItemInfoView.swift; sourceTree = "<group>"; };
 		B7E5E76A28BBDCA3003A8877 /* GHFItemInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFItemInfoViewController.swift; sourceTree = "<group>"; };
 		B7E5E76C28BBE0A6003A8877 /* GHFReposeItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHFReposeItemViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B733498628BF8E4A00633799 /* TabBars */ = {
+			isa = PBXGroup;
+			children = (
+				B733498728BF8E8000633799 /* GHFTabBarController.swift */,
+			);
+			path = TabBars;
+			sourceTree = "<group>";
+		};
 		B7E5E77028BBE4A7003A8877 /* ItemInfoViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +166,7 @@
 		B7EC1E2728B8BB450049069E /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				B733498628BF8E4A00633799 /* TabBars */,
 				B7EC1E4F28BA58E70049069E /* Views */,
 				B7EC1E4A28BA28D60049069E /* ImageViews */,
 				B7EC1E4728BA27CD0049069E /* Cells */,
@@ -245,6 +258,7 @@
 			children = (
 				B7EC1E4528BA17D70049069E /* ErrorMessage.swift */,
 				B7EC1E4D28BA416A0049069E /* UIHelper.swift */,
+				B733498928BF8EEF00633799 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -369,8 +383,10 @@
 				B7EC1E3F28B8FAE80049069E /* Follower.swift in Sources */,
 				B7EC1E3528B8E6150049069E /* GHFBodyLabel.swift in Sources */,
 				B7EC1E4328B905020049069E /* NetworkManager.swift in Sources */,
+				B733498A28BF8EEF00633799 /* Constants.swift in Sources */,
 				B7EC1E2D28B8BECD0049069E /* GHFTextField.swift in Sources */,
 				B7EC1E5328BB57570049069E /* UserInfoViewController.swift in Sources */,
+				B733498828BF8E8000633799 /* GHFTabBarController.swift in Sources */,
 				B7EC1E5728BBABD80049069E /* GHFSecondaryTitleLabel.swift in Sources */,
 				B733498328BF75E900633799 /* GHFAllertContainerView.swift in Sources */,
 				B7EC1E3828B8E78D0049069E /* GHFAllertViewController.swift in Sources */,
