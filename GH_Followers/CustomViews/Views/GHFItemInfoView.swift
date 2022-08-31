@@ -33,16 +33,16 @@ class GHFItemInfoView: UIView {
     func set(itemInfoType: ItemInfoType, withCount count: Int) {
         switch itemInfoType {
         case .repose:
-            symbolImageView.image = UIImage(systemName: "folder.circle.fill")
+            symbolImageView.image = UIImage(systemName: SFSymbols.repose)
             titleLabel.text = "Репозитории"
         case .gists:
-            symbolImageView.image = UIImage(systemName: "doc.circle.fill")
+            symbolImageView.image = UIImage(systemName: SFSymbols.gists)
             titleLabel.text = "Фрагменты"
         case .followers:
-            symbolImageView.image = UIImage(systemName: "heart.circle.fill")
+            symbolImageView.image = UIImage(systemName: SFSymbols.followers)
             titleLabel.text = "Подписчики"
         case .following:
-            symbolImageView.image = UIImage(systemName: "person.circle.fill")
+            symbolImageView.image = UIImage(systemName: SFSymbols.following)
             titleLabel.text = "Подписки"
         }
         

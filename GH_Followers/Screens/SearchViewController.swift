@@ -14,6 +14,7 @@ class SearchViewController: UIViewController {
     let userNameTextField = GHFTextField()
     let getFollowersButton = GHFButton(backgroundColor: .systemGreen, title: "Показать подписчиков")
     var isUserNameEnterted: Bool { return !userNameTextField.text!.isEmpty }
+    var logoImageViewTopConstraint: NSLayoutConstraint!
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -27,13 +28,14 @@ class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        userNameTextField.text = ""
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     //MARK: - Methods
     //Dismiss keyboard for tap anywhere
     func dismissKeyboardForTap() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
     }
     
@@ -41,10 +43,13 @@ class SearchViewController: UIViewController {
     private func configureLogoImageView() {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        logoImageView.image = UIImage(named: "gh-logo")
+        logoImageView.image = Images.ghLogo
+        
+        let topConstraint: CGFloat = DeviceType.isiPhoneSE || DeviceType.isiPhone8Zoomed ? 20 : 90
+        logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraint)
+        logoImageViewTopConstraint.isActive = true
         
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: 220),
             logoImageView.widthAnchor.constraint(equalToConstant: 220)
@@ -85,9 +90,9 @@ class SearchViewController: UIViewController {
                 buttonTitle: "Понятно")
             return
         }
-        let followerListViewController = FollowerListViewController()
-        followerListViewController.username = userNameTextField.text
-        followerListViewController.title = userNameTextField.text
+        
+        userNameTextField.resignFirstResponder()
+        let followerListViewController = FollowerListViewController(username: userNameTextField.text!)
         navigationController?.pushViewController(followerListViewController, animated: true)
     }
 }
