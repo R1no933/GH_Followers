@@ -40,7 +40,8 @@ class GHFUserInfoHeaderViewController: UIViewController {
     //MARK: - Methods
     //Configure UI elements
     private func configure() {
-        avatarImageView.downloadImage(from: user.avatarUrl)
+        downloadAvatarImage()
+        
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? "Имя не указано"
         locationLabel.text = user.location ?? "Локация не указана"
@@ -49,6 +50,14 @@ class GHFUserInfoHeaderViewController: UIViewController {
         
         locationImageView.image = UIImage(systemName: SFSymbols.location)
         locationImageView.tintColor = .secondaryLabel
+    }
+    
+    //Download avatar image
+    private func downloadAvatarImage() {
+        NetworkManager.shared.downloadAvatarImage(from: user.avatarUrl) { [weak self] image in
+            guard let self = self else { return }
+            DispatchQueue.main.async { self.avatarImageView.image = image }
+        }
     }
     
     //Add subviews

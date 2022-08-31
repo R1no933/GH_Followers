@@ -10,7 +10,7 @@ import UIKit
 class GHFAllertViewController: UIViewController {
     
     //MARK: - Properties
-    let containerView = UIView()
+    let containerView = GHFAlertContainerView(frame: .zero)
     let titleLabel = GHFTitleLabel(textAligment: .center, fontSize: 20)
     let errorMessageLabel = GHFBodyLabel(textAligment: .center)
     let actionButton = GHFButton(backgroundColor: .systemPink, title: "Понятно")
@@ -33,7 +33,7 @@ class GHFAllertViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.70)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         configureContainerView()
         configureTitleLabel()
         configureButton()
@@ -48,11 +48,6 @@ class GHFAllertViewController: UIViewController {
     //MARK: - Layout container
     private func configureContainerView() {
         view.addSubview(containerView)
-        containerView.backgroundColor = .systemBackground
-        containerView.layer.cornerRadius = 15
-        containerView.layer.borderWidth = 2
-        containerView.layer.borderColor = UIColor.white.cgColor
-        containerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
