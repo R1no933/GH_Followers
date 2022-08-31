@@ -19,10 +19,11 @@ class GHFButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(backgroundColor: UIColor, title: String) {
-        self.init(frame: .zero)
+    init(backgroundColor: UIColor, title: String) {
+        super.init(frame: .zero)
         self.backgroundColor = backgroundColor
         self.setTitle(title, for: .normal)
+        configure()
     }
     
     //MARK: - Configure methods
