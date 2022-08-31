@@ -12,7 +12,7 @@ protocol FollowerListViewControllerDelegate: AnyObject {
     func didRequestFollowers(with username: String)
 }
 
-class FollowerListViewController: GHFDataLoadingViewController {
+class FollowerListViewController: UIViewController {
     
     //MARK: - Enum
     enum Section { case main }
