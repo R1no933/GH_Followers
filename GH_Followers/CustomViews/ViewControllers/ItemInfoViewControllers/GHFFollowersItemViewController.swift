@@ -7,7 +7,24 @@
 
 import UIKit
 
+//MARK: - Protocol
+protocol GHFFollowersItemViewControllerDelegate: AnyObject {
+    func didTapedShowFollowers(for user: User)
+}
+
 class GHFFollowersItemViewController: GHFItemInfoViewController {
+    //MARK: - Properties
+    weak var delegate: GHFFollowersItemViewControllerDelegate!
+    
+    //MARK: - Inits
+    init(user: User, delegate: GHFFollowersItemViewControllerDelegate) {
+        super.init(user: user)
+        self.delegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {

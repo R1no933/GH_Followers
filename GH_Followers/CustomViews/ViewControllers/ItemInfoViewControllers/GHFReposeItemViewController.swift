@@ -7,8 +7,25 @@
 
 import UIKit
 
+//MARK: - Protocol
+protocol GHFReposeItemViewControllerDelegate: AnyObject {
+    func didTapedShowProfile(for user: User)
+}
+
 class GHFReposeItemViewController: GHFItemInfoViewController {
-        
+    //MARK: - Properties
+    weak var delegate: GHFReposeItemViewControllerDelegate!
+    
+    //MARK: - Inits
+    init(user: User, delegate: GHFReposeItemViewControllerDelegate) {
+        super.init(user: user)
+        self.delegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

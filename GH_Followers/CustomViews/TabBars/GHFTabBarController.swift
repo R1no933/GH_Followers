@@ -1,15 +1,13 @@
 //
-//  TabBarController.swift
+//  GHFTabBarController.swift
 //  GH_Followers
 //
-//  Created by Dmitriy Baskakov on 30.08.2022.
+//  Created by Dmitriy Baskakov on 31.08.2022.
 //
 
 import UIKit
 
-class TabBarController: UITabBarController {
-    //MARK: - Properties
-    //MARK: - Inits
+class GHFTabBarController: UITabBarController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +22,7 @@ class TabBarController: UITabBarController {
         searchViewController.title = "Поиск"
         searchViewController.tabBarItem = UITabBarItem(
             title: "Поиск",
-            image: UIImage(systemName: "magnifyingglass.circle.fill"),
+            image: SFSymbols.search,
             tag: 0)
         
         return UINavigationController(rootViewController: searchViewController)
@@ -36,7 +34,7 @@ class TabBarController: UITabBarController {
         favoritesViewController.title = "Избранное"
         favoritesViewController.tabBarItem = UITabBarItem(
             title: "Избранное",
-            image: UIImage(systemName: "star.circle.fill"),
+            image: SFSymbols.favoriteTabBar,
             tag: 1)
         
         return UINavigationController(rootViewController: favoritesViewController)

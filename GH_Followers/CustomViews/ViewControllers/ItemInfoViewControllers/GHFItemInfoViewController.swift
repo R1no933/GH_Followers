@@ -7,6 +7,12 @@
 
 import UIKit
 
+//MARK: - Protocols
+protocol ItemInfoViewControllerDelegate: AnyObject {
+    func didTapedShowProfile(for user: User)
+    func didTapedShowFollowers(for user: User)
+}
+
 class GHFItemInfoViewController: UIViewController {
     
     //MARK: - Properties
@@ -15,7 +21,6 @@ class GHFItemInfoViewController: UIViewController {
     let secondItemInfoView = GHFItemInfoView()
     let actionButton = GHFButton()
     var user: User!
-    weak var delegate: UserInfoViewControllerDelegate!
     
     //MARK: - Inits
     init(user: User) {
@@ -58,21 +63,20 @@ class GHFItemInfoViewController: UIViewController {
     
     //Layout UI elements
     private func layout() {
-        view.addSubview(stackView)
-        view.addSubview(actionButton)
+        view.addSubviews([stackView, actionButton])
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.heightAnchor.constraint(equalToConstant: 50),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: Metrics.ItemInfoVC.padding),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metrics.ItemInfoVC.padding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metrics.ItemInfoVC.padding),
+            stackView.heightAnchor.constraint(equalToConstant: Metrics.ItemInfoVC.height),
             
-            actionButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            actionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            actionButton.heightAnchor.constraint(equalToConstant: 45)
+            actionButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Metrics.ItemInfoVC.padding),
+            actionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metrics.ItemInfoVC.padding),
+            actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metrics.ItemInfoVC.padding),
+            actionButton.heightAnchor.constraint(equalToConstant: Metrics.ItemInfoVC.height)
         ])
     }
     

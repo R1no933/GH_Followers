@@ -7,13 +7,12 @@
 
 import UIKit
 
-class FavoritesListViewController: UIViewController {
+class FavoritesListViewController: GHFDataLoadingViewController {
     
     //MARK: - Properties
     let tableView = UITableView()
     var favorites: [Follower] = []
     
-    //MARK: - Inits
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,21 +33,29 @@ class FavoritesListViewController: UIViewController {
             
             switch result {
             case .success(let favorites):
-                if favorites.isEmpty {
-                    self.showEmptyStateView(with: "У вас еще нет избранных пользователей. Пора это исправить!!!😉", in: self.view)
-                } else {
-                    self.favorites = favorites
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.view.bringSubviewToFront(self.tableView)
-                    }
-                }
-                self.favorites = favorites
+                self.updateUI(with: favorites)
+                
             case .failure(let error):
                 self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно")
             }
         }
     }
+    
+    //Update UI elements
+    private func updateUI(with favorites: [Follower]) {
+        if favorites.isEmpty {
+            self.showEmptyStateView(with: "У вас еще нет избранных пользователей. Пора это исправить!!!😉", in: self.view)
+        } else {
+            self.favorites = favorites
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.view.bringSubviewToFront(self.tableView)
+            }
+        }
+        
+        self.favorites = favorites
+    }
+    
     
     //Caonfigure view controller
     private func configureViewController() {
@@ -64,6 +71,7 @@ class FavoritesListViewController: UIViewController {
         tableView.rowHeight = 80
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.removeExcessCells()
         
         tableView.register(FavoriteCell.self, forCellReuseIdentifier: FollowerCell.identifier)
     }
@@ -95,15 +103,16 @@ extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegat
     //Swipe for delete fron favorites
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
-        let favorite = favorites[indexPath.row]
-        favorites.remove(at: indexPath.row)
         
-        tableView.deleteRows(at: [indexPath], with: .left)
-        
-        PersistanceManager.updateWith(favorite: favorite, actionType: .remove) { [weak self] error in
+        PersistanceManager.updateWith(favorite: favorites[indexPath.row], actionType: .remove) { [weak self] error in
             guard let self = self else { return }
             
-            guard let error = error else { return }
+            guard let error = error else {
+                self.favorites.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .left)
+                
+                return
+            }
             self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно ")
         }
     }
