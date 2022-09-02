@@ -16,16 +16,19 @@ class UserInfoViewController: UIViewController {
     
     //MARK: - Properties
     var username: String!
+    
     let headerView = UIView()
     let firstItemsView = UIView()
     let secondItemsView = UIView()
     var viewsArray: [UIView] = []
-    let dateLabel = GHFBodyLabel(textAligment: .center)
-    weak var delegate: UserInfoViewControllerDelegate!
+    
     let scrollView = UIScrollView()
     let contentView = UIView()
-     
     
+    let dateLabel = GHFBodyLabel(textAligment: .center)
+    
+    weak var delegate: UserInfoViewControllerDelegate!
+
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +69,7 @@ class UserInfoViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 600)
+            contentView.heightAnchor.constraint(equalToConstant: Metrics.UserInfo.contentViewHeight)
         ])
     }
     
@@ -94,23 +97,23 @@ class UserInfoViewController: UIViewController {
             views.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                views.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-                views.trailingAnchor.constraint(equalTo: contentView .trailingAnchor, constant: -20)
+                views.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Metrics.UserInfo.padding),
+                views.trailingAnchor.constraint(equalTo: contentView .trailingAnchor, constant: -Metrics.UserInfo.padding)
             ])
         }
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 220),
+            headerView.heightAnchor.constraint(equalToConstant: Metrics.UserInfo.headerViewHeight),
             
-            firstItemsView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
-            firstItemsView.heightAnchor.constraint(equalToConstant: 140),
+            firstItemsView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: Metrics.UserInfo.padding),
+            firstItemsView.heightAnchor.constraint(equalToConstant: Metrics.UserInfo.itemViewHeight),
             
-            secondItemsView.topAnchor.constraint(equalTo: firstItemsView.bottomAnchor, constant: 20),
-            secondItemsView.heightAnchor.constraint(equalToConstant: 140),
+            secondItemsView.topAnchor.constraint(equalTo: firstItemsView.bottomAnchor, constant: Metrics.UserInfo.padding),
+            secondItemsView.heightAnchor.constraint(equalToConstant: Metrics.UserInfo.itemViewHeight),
             
-            dateLabel.topAnchor.constraint(equalTo: secondItemsView.bottomAnchor, constant: 20),
-            dateLabel.heightAnchor.constraint(equalToConstant: 50)
+            dateLabel.topAnchor.constraint(equalTo: secondItemsView.bottomAnchor, constant: Metrics.UserInfo.padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: Metrics.UserInfo.createdLabelHeight)
         ])
     }
     

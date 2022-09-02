@@ -82,22 +82,41 @@ class FollowerListViewController: GHFDataLoadingViewController {
             
             switch result {
             case .success(let followers):
-                if followers.count < NetworkManager.usersPerPage { self.hasMoreFollowers = false }
-                self.followers.append(contentsOf: followers)
-                
-                if followers .isEmpty {
-                    let message = "У пользователя пока нет подписчиков.😒 Стань первым!😏"
-                    DispatchQueue.main.async { self.showEmptyStateView(with: message, in: self.view) }
-                    return
-                }
-                
-                self.updateData(on: self.followers)
+                self.updateUI(with: followers)
                 
             case.failure(let error):
                 self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно")
             }
             
             self.isLoadingMoreFollowers = false
+        }
+    }
+    
+    //Update UI elements in follover list
+    private func updateUI(with followers: [Follower]) {
+        if followers.count < NetworkManager.usersPerPage { self.hasMoreFollowers = false }
+        self.followers.append(contentsOf: followers)
+        
+        if followers .isEmpty {
+            let message = "У пользователя пока нет подписчиков.😒 Стань первым!😏"
+            DispatchQueue.main.async { self.showEmptyStateView(with: message, in: self.view) }
+            return
+        }
+        
+        self.updateData(on: self.followers)
+    }
+    
+    //Add user to favorite list
+    private func addUserToFavorite(user: User) {
+        let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+        
+        PersistanceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+            guard let self = self else { return }
+            guard let error = error else {
+                self.presentAlertOnMainThread(title: "Готово!🫡", message: "Пользователь успешно добавлен в избранное.🥳", buttonTitle: "Отлично!")
+                return
+            }
+            self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно")
         }
     }
     
@@ -128,29 +147,17 @@ class FollowerListViewController: GHFDataLoadingViewController {
     }
     
     //MARK: - Objc methods
+    //Add button tapped
     @objc func addbuttonTap() {
         showLoadingView()
         
         NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
             guard let self = self else { return }
-            
             self.dismissLoadingView()
             
             switch result {
             case .success(let user):
-                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
-                
-                PersistanceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-                    guard let self = self else { return }
-                    
-                    guard let error = error else {
-                        self.presentAlertOnMainThread(title: "Готово!🫡", message: "Пользователь успешно добавлен в избранное.🥳", buttonTitle: "Отлично!")
-                        return
-                    }
-                    
-                    self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно")
-
-                }
+                self.addUserToFavorite(user: user)
             
             case .failure(let error):
                 self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно")

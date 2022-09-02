@@ -101,6 +101,7 @@ class NetworkManager {
     //Download avatar image
     func downloadImage(from urlString: String, completed: @escaping (UIImage?) -> Void) {
         let cacheKey = NSString(string: urlString)
+        
         if let image = cache.object(forKey: cacheKey) {
             completed(image)
             return

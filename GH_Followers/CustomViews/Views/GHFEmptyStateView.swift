@@ -31,10 +31,7 @@ class GHFEmptyStateView: UIView {
     //MARK: - Methods
     //Configure view
     private func configure() {
-        addSubviews([
-            messageLabel,
-            emptyStateImageView
-        ])
+        addSubviews([messageLabel, emptyStateImageView])
         configureMessageLabel()
         configureImageView()
     }
@@ -45,10 +42,10 @@ class GHFEmptyStateView: UIView {
         messageLabel.textColor = .secondaryLabel
         
         NSLayoutConstraint.activate([
-            messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -170),
-            messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 45),
-            messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -45),
-            messageLabel.heightAnchor.constraint(equalToConstant: 200)
+            messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -Metrics.EmptyState.messageLabelYAnchor),
+            messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metrics.EmptyState.messageLabelPadding),
+            messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Metrics.EmptyState.messageLabelPadding),
+            messageLabel.heightAnchor.constraint(equalToConstant: Metrics.EmptyState.messageLabelHeight)
         ])
     }
     
@@ -58,10 +55,10 @@ class GHFEmptyStateView: UIView {
         emptyStateImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            emptyStateImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
-            emptyStateImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
-            emptyStateImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 255),
-            emptyStateImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -40)
+            emptyStateImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: Metrics.EmptyState.multiplier),
+            emptyStateImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: Metrics.EmptyState.multiplier),
+            emptyStateImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Metrics.EmptyState.imageViewTrailing),
+            emptyStateImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: Metrics.EmptyState.imageViewBottom)
         ])
     }
 }

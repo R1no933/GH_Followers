@@ -51,11 +51,7 @@ class GHFItemInfoView: UIView {
     
     //Configure view
     private func configure() {
-        addSubviews([
-            symbolImageView,
-            titleLabel,
-            countLabel
-        ])
+        addSubviews([symbolImageView, titleLabel, countLabel])
         
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
         symbolImageView.contentMode = .scaleAspectFill
@@ -64,18 +60,18 @@ class GHFItemInfoView: UIView {
         NSLayoutConstraint.activate([
             symbolImageView.topAnchor.constraint(equalTo: self.topAnchor),
             symbolImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            symbolImageView.widthAnchor.constraint(equalToConstant: 20),
-            symbolImageView.heightAnchor.constraint(equalToConstant: 20),
+            symbolImageView.widthAnchor.constraint(equalToConstant: Metrics.ItemInfo.imageViewSize),
+            symbolImageView.heightAnchor.constraint(equalToConstant: Metrics.ItemInfo.imageViewSize),
             
             titleLabel.centerYAnchor.constraint(equalTo: symbolImageView.centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: symbolImageView.trailingAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(equalTo: symbolImageView.trailingAnchor, constant: Metrics.ItemInfo.titleLeading),
             titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 18),
+            titleLabel.heightAnchor.constraint(equalToConstant: Metrics.ItemInfo.labelHeight),
             
-            countLabel.topAnchor.constraint(equalTo: symbolImageView.bottomAnchor, constant: 4),
+            countLabel.topAnchor.constraint(equalTo: symbolImageView.bottomAnchor, constant: Metrics.ItemInfo.countTop),
             countLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             countLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            countLabel.heightAnchor.constraint(equalToConstant: 18)
+            countLabel.heightAnchor.constraint(equalToConstant: Metrics.ItemInfo.labelHeight)
             
         ])
     }

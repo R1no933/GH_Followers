@@ -13,18 +13,14 @@ class SearchViewController: UIViewController {
     let logoImageView = UIImageView()
     let userNameTextField = GHFTextField()
     let getFollowersButton = GHFButton(backgroundColor: .systemGreen, title: "Показать подписчиков")
+    
     var isUserNameEnterted: Bool { return !userNameTextField.text!.isEmpty }
-    var logoImageViewTopConstraint: NSLayoutConstraint!
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        view.addSubviews([
-            logoImageView,
-            userNameTextField,
-            getFollowersButton
-        ])
+        view.addSubviews([logoImageView, userNameTextField, getFollowersButton])
         configureLogoImageView()
         configureTextField()
         configureButton()
@@ -50,13 +46,12 @@ class SearchViewController: UIViewController {
         logoImageView.image = Images.ghLogo
         
         let topConstraint: CGFloat = DeviceType.isiPhoneSE || DeviceType.isiPhone8Zoomed ? 20 : 90
-        logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraint)
-        logoImageViewTopConstraint.isActive = true
         
         NSLayoutConstraint.activate([
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraint),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.heightAnchor.constraint(equalToConstant: 220),
-            logoImageView.widthAnchor.constraint(equalToConstant: 220)
+            logoImageView.heightAnchor.constraint(equalToConstant: Metrics.Search.imageViewSize),
+            logoImageView.widthAnchor.constraint(equalToConstant: Metrics.Search.imageViewSize)
         ])
         
     }
@@ -65,10 +60,10 @@ class SearchViewController: UIViewController {
         userNameTextField.delegate = self
         
         NSLayoutConstraint.activate([
-            userNameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 50),
-            userNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            userNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            userNameTextField.heightAnchor.constraint(equalToConstant: 50)
+            userNameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: Metrics.Search.textFieldConstraints),
+            userNameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metrics.Search.textFieldConstraints),
+            userNameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metrics.Search.textFieldConstraints),
+            userNameTextField.heightAnchor.constraint(equalToConstant: Metrics.Search.textFieldConstraints)
         ])
     }
     
@@ -76,10 +71,10 @@ class SearchViewController: UIViewController {
         getFollowersButton.addTarget(self, action: #selector(pushFolloweListViewControlloer), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            getFollowersButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            getFollowersButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            getFollowersButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            getFollowersButton.heightAnchor.constraint(equalToConstant: 50)
+            getFollowersButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Metrics.Search.buttonConstraints),
+            getFollowersButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metrics.Search.buttonConstraints),
+            getFollowersButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metrics.Search.buttonConstraints),
+            getFollowersButton.heightAnchor.constraint(equalToConstant: Metrics.Search.buttonConstraints)
         ])
     }
     
@@ -106,4 +101,3 @@ extension SearchViewController: UITextFieldDelegate {
         return true
     }
 }
-
