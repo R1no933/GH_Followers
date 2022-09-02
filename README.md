@@ -11,7 +11,7 @@
   - Имя пользователя (если указано в профиле GitHub);
   - Локация ползьвоателя (если указана в профиле GitHub);
   - Раздел о пользователе (если указан в профиле GitHub);
-  - Раздел с репощитариями и гистсами;
+  - Раздел с репозитариями и гистсами;
   - Раздел с подписчиками и подписками;
   - Дата создания профиля.
 4. Просмотр GitHub профиля пользователя по нажатию на кнопку "Показать профиль" (Safari servises)
@@ -32,15 +32,12 @@
 
 # Скриншоты:
 
-![SearchScreen (1)](https://user-images.githubusercontent.com/104028198/188237269-8f6b1aec-bfcb-4f88-b3ce-419387b4e9ba.png) ![NoFollowes](https://user-images.githubusercontent.com/104028198/188237485-ac12b303-2770-4ac7-a2c0-a73637d07c39.png)
-![EmptyErrorScreen](https://user-images.githubusercontent.com/104028198/188238029-ad6a301d-a1ac-490f-92a1-666ef40676a7.png)
+![SearchScreen (1)](https://user-images.githubusercontent.com/104028198/188237269-8f6b1aec-bfcb-4f88-b3ce-419387b4e9ba.png) ![NoFollowes](https://user-images.githubusercontent.com/104028198/188237485-ac12b303-2770-4ac7-a2c0-a73637d07c39.png) ![EmptyErrorScreen](https://user-images.githubusercontent.com/104028198/188238029-ad6a301d-a1ac-490f-92a1-666ef40676a7.png)
 
 
-![FollowerList](https://user-images.githubusercontent.com/104028198/188237610-ed402248-ec50-49d2-91a2-9b924779a1ca.png) ![IMG_8688](https://user-images.githubusercontent.com/104028198/188237863-e9c10b99-e757-408e-9592-c54592b2f192.png)
-![No Favorite](https://user-images.githubusercontent.com/104028198/188238168-0de6c84a-94b2-4490-9e55-ed39f1f7ee39.png)
+![FollowerList](https://user-images.githubusercontent.com/104028198/188237610-ed402248-ec50-49d2-91a2-9b924779a1ca.png) ![IMG_8688](https://user-images.githubusercontent.com/104028198/188237863-e9c10b99-e757-408e-9592-c54592b2f192.png) ![No Favorite](https://user-images.githubusercontent.com/104028198/188238168-0de6c84a-94b2-4490-9e55-ed39f1f7ee39.png)
 
-![UserInfo](https://user-images.githubusercontent.com/104028198/188238716-de284fcc-8974-4cfd-b5d2-2f9a6eaf5d50.png) ![GitHubProfile](https://user-images.githubusercontent.com/104028198/188238730-208a45c1-cc17-467a-bf75-5c808f16b3e5.png)
-![LoadingScreen](https://user-images.githubusercontent.com/104028198/188238933-5907fcd0-e59c-414f-8fb2-73127efeba35.png)
+![UserInfo](https://user-images.githubusercontent.com/104028198/188238716-de284fcc-8974-4cfd-b5d2-2f9a6eaf5d50.png) ![GitHubProfile](https://user-images.githubusercontent.com/104028198/188238730-208a45c1-cc17-467a-bf75-5c808f16b3e5.png) ![LoadingScreen](https://user-images.githubusercontent.com/104028198/188238933-5907fcd0-e59c-414f-8fb2-73127efeba35.png)
 
 # Итог:
 Данный проект был итогом проходжения курса Шона Аленв
