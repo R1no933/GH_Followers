@@ -22,12 +22,15 @@ class UserInfoViewController: UIViewController {
     var viewsArray: [UIView] = []
     let dateLabel = GHFBodyLabel(textAligment: .center)
     weak var delegate: UserInfoViewControllerDelegate!
+    let scrollView = UIScrollView()
+    let contentView = UIView()
      
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        configureScrollView()
         layoutUI()
         getUserInfo(username: username)
     }
@@ -54,6 +57,19 @@ class UserInfoViewController: UIViewController {
         navigationItem.rightBarButtonItem = doneButton
     }
     
+    //Configure scroll view
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        scrollView.pinToEdges(of: view)
+        contentView.pinToEdges(of: scrollView)
+        
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 600)
+        ])
+    }
+    
     //Add child view on header view
     private func add(childViewController: UIViewController, on containerView: UIView) {
         addChild(childViewController)
@@ -74,17 +90,17 @@ class UserInfoViewController: UIViewController {
     private func layoutUI() {
         viewsArray = [headerView, firstItemsView, secondItemsView, dateLabel]
         for views in viewsArray {
-            view.addSubview(views)
+            contentView.addSubview(views)
             views.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                views.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-                views.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+                views.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+                views.trailingAnchor.constraint(equalTo: contentView .trailingAnchor, constant: -20)
             ])
         }
         
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 220),
             
             firstItemsView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
