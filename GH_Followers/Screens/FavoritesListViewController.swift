@@ -33,21 +33,29 @@ class FavoritesListViewController: GHFDataLoadingViewController {
             
             switch result {
             case .success(let favorites):
-                if favorites.isEmpty {
-                    self.showEmptyStateView(with: "У вас еще нет избранных пользователей. Пора это исправить!!!😉", in: self.view)
-                } else {
-                    self.favorites = favorites
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.view.bringSubviewToFront(self.tableView)
-                    }
-                }
-                self.favorites = favorites
+                self.updateUI(with: favorites)
+                
             case .failure(let error):
                 self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно")
             }
         }
     }
+    
+    //Update UI elements
+    private func updateUI(with favorites: [Follower]) {
+        if favorites.isEmpty {
+            self.showEmptyStateView(with: "У вас еще нет избранных пользователей. Пора это исправить!!!😉", in: self.view)
+        } else {
+            self.favorites = favorites
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.view.bringSubviewToFront(self.tableView)
+            }
+        }
+        
+        self.favorites = favorites
+    }
+    
     
     //Caonfigure view controller
     private func configureViewController() {
@@ -102,8 +110,8 @@ extension FavoritesListViewController: UITableViewDataSource, UITableViewDelegat
             guard let error = error else {
                 self.favorites.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .left)
-                return
                 
+                return
             }
             self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно ")
         }

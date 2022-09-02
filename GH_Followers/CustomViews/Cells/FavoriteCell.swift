@@ -11,7 +11,7 @@ class FavoriteCell: UITableViewCell {
     //MARK: - Properties
     static let identifier = "FavoriteCell"
     let avatarImageView = GHFAvataImageView(frame: .zero)
-    let username = GHFTitleLabel(textAligment: .left, fontSize: 24)
+    let usernameLabel = GHFTitleLabel(textAligment: .left, fontSize: 24)
     
     //MARK: - Inits
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -26,33 +26,25 @@ class FavoriteCell: UITableViewCell {
     //MARK: - Methods
     //Set info for elements
     func set(favorite: Follower) {
-        username.text = favorite.login
-        
-        NetworkManager.shared.downloadImage(from: favorite.avatarUrl) { [ weak self ] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async { self.avatarImageView.image = image }
-        }
+        usernameLabel.text = favorite.login
+        avatarImageView.downloadImage(fromURL: favorite.avatarUrl)
     }
     
     //Configure and layout cell
     private func configure() {
-        addSubviews([
-            avatarImageView,
-            username
-        ])
-        
+        addSubviews([avatarImageView, usernameLabel])
         accessoryType = .disclosureIndicator
         
         NSLayoutConstraint.activate([
             avatarImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 60),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 60),
+            avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metrics.FavoriteCell.avatarLeading),
+            avatarImageView.heightAnchor.constraint(equalToConstant: Metrics.FavoriteCell.avatarSize),
+            avatarImageView.widthAnchor.constraint(equalToConstant: Metrics.FavoriteCell.avatarSize),
             
-            username.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            username.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 24),
-            username.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12),
-            username.heightAnchor.constraint(equalToConstant: 40)
+            usernameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            usernameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: Metrics.FavoriteCell.usernameLeading),
+            usernameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Metrics.FavoriteCell.usernameTrailing),
+            usernameLabel.heightAnchor.constraint(equalToConstant: Metrics.FavoriteCell.usernameHeight)
         ])
     }
 }

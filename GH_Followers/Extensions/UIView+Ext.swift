@@ -11,7 +11,7 @@ extension UIView {
     //MARK: - Methods
     //Add sunviews
     public func addSubviews(_ subviews: [UIView]) {
-           subviews.forEach({ self.addSubview($0) })
+        subviews.forEach({ self.addSubview($0) })
     }
     
     //Pin to edges on superview

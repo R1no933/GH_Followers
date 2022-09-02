@@ -32,30 +32,15 @@ class GHFUserInfoHeaderViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviews([
-            avatarImageView,
-            usernameLabel,
-            nameLabel,
-            locationImageView,
-            locationLabel,
-            bioLabel
-        ])
+        view.addSubviews([avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel])
         configure()
         layoutUI()
     }
     
     //MARK: - Methods
-    //Download avatar image
-    private func downloadAvatarImage() {
-        NetworkManager.shared.downloadImage(from: user.avatarUrl) { [weak self] image in
-            guard let self = self else { return }
-            DispatchQueue.main.async { self.avatarImageView.image = image }
-        }
-    }
-    
     //Configure UI elements
     private func configure() {
-        downloadAvatarImage()
+        avatarImageView.downloadImage(fromURL: user.avatarUrl)
         
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? "Имя не указано"
@@ -72,35 +57,35 @@ class GHFUserInfoHeaderViewController: UIViewController {
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            avatarImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: Metrics.UserInfoHeader.avatarTop),
             avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 90),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 90),
+            avatarImageView.widthAnchor.constraint(equalToConstant: Metrics.UserInfoHeader.avatarSize),
+            avatarImageView.heightAnchor.constraint(equalToConstant: Metrics.UserInfoHeader.avatarSize),
             
             usernameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
-            usernameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 12),
+            usernameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: Metrics.UserInfoHeader.usernameLeading),
             usernameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            usernameLabel.heightAnchor.constraint(equalToConstant: 38),
+            usernameLabel.heightAnchor.constraint(equalToConstant: Metrics.UserInfoHeader.usernameHeight),
             
-            nameLabel.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor, constant: 5),
-            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 12),
+            nameLabel.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor, constant: Metrics.UserInfoHeader.nameYAcnhor),
+            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: Metrics.UserInfoHeader.nameLeading),
             nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            nameLabel.heightAnchor.constraint(equalToConstant: 20),
+            nameLabel.heightAnchor.constraint(equalToConstant: Metrics.UserInfoHeader.nameHeight),
             
             locationImageView.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
-            locationImageView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 12),
-            locationImageView.widthAnchor.constraint(equalToConstant: 20),
-            locationImageView.heightAnchor.constraint(equalToConstant: 20),
+            locationImageView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: Metrics.UserInfoHeader.locationImageLeading),
+            locationImageView.widthAnchor.constraint(equalToConstant: Metrics.UserInfoHeader.locationImageSize),
+            locationImageView.heightAnchor.constraint(equalToConstant: Metrics.UserInfoHeader.locationImageSize),
             
             locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor),
-            locationLabel.leadingAnchor.constraint(equalTo: locationImageView.trailingAnchor, constant: 5),
+            locationLabel.leadingAnchor.constraint(equalTo: locationImageView.trailingAnchor, constant: Metrics.UserInfoHeader.locationLabelLeading),
             locationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            locationLabel.heightAnchor.constraint(equalToConstant: 20),
+            locationLabel.heightAnchor.constraint(equalToConstant: Metrics.UserInfoHeader.locationLabelHeight),
             
-            bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 12),
+            bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: Metrics.UserInfoHeader.bioTop),
             bioLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bioLabel.heightAnchor.constraint(equalToConstant: 90)
+            bioLabel.heightAnchor.constraint(equalToConstant: Metrics.UserInfoHeader.bioHeight)
         ])
     }
 }

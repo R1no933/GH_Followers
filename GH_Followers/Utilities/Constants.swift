@@ -6,7 +6,8 @@
 //
 
 import UIKit
-//MARK: - Enum for SFSumbols
+//MARK: - Enums
+//Enum for SFSymbols elements
 enum SFSymbols {
     static let location = UIImage(systemName: "mappin.circle.fill")
     static let repose = UIImage(systemName:"folder.circle.fill")
@@ -17,14 +18,14 @@ enum SFSymbols {
     static let favoriteTabBar = UIImage(systemName:"star.circle.fill")
 }
 
-//MARK: - Enum for images
+//Enum for images
 enum Images {
     static let ghLogo = UIImage(named: "gh-logo")
     static let avatarPlaceholder = UIImage(named: "avatar-placeholder")
     static let emptyStateLogo = UIImage(named: "empty-state-logo")
 }
 
-//MARK: - Enum for getting screen size
+//Enum for getting screen size
 enum ScreenSize {
     static let height = UIScreen.main.bounds.height
     static let widht = UIScreen.main.bounds.width
@@ -32,8 +33,8 @@ enum ScreenSize {
     static let minLenght = min(ScreenSize.widht, ScreenSize.height)
 }
 
-//MARK: - Enum for change device type
-enum DeviceType {
+//Enum for change device type
+enum DeviceType {    
     static let idiom = UIDevice.current.userInterfaceIdiom
     static let nativeScale = UIScreen.main.nativeScale
     static let scale = UIScreen.main.scale

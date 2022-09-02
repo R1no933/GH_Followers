@@ -16,9 +16,7 @@ enum PersistanceManager {
     static private let defaults = UserDefaults.standard
     
     //Keys
-    enum Keys {
-        static let favorites = "favorites"
-    }
+    enum Keys { static let favorites = "favorites" }
     
     //MARK: - Methods
     //Updated favorite list
@@ -29,10 +27,12 @@ enum PersistanceManager {
                 
                 switch actionType {
                 case .add:
+                   
                     guard !favorites.contains(favorite) else {
                         completed(.alreadyInFavorites)
                         return
                     }
+                    
                     favorites.append(favorite)
                 case .remove:
                     favorites.removeAll { $0.login == favorite.login }
