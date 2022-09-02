@@ -27,8 +27,8 @@ class GHFDataLoadingViewController: UIViewController {
         indicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            indicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
         
         indicator.startAnimating()

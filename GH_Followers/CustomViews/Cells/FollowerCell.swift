@@ -34,8 +34,10 @@ class FollowerCell: UICollectionViewCell {
     }
     
     private func configure() {
-        addSubview(avatarImageView)
-        addSubview(usernameLabel)
+        addSubviews([
+            avatarImageView,
+            usernameLabel
+        ])
         
         NSLayoutConstraint.activate([
             avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),

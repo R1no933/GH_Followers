@@ -8,11 +8,13 @@
 import UIKit
 //MARK: - Enum for SFSumbols
 enum SFSymbols {
-    static let location = "mappin.circle.fill"
-    static let repose = "folder.circle.fill"
-    static let gists = "doc.circle.fill"
-    static let followers = "heart.circle.fill"
-    static let following = "person.circle.fill"
+    static let location = UIImage(systemName: "mappin.circle.fill")
+    static let repose = UIImage(systemName:"folder.circle.fill")
+    static let gists = UIImage(systemName:"doc.circle.fill")
+    static let followers = UIImage(systemName:"heart.circle.fill")
+    static let following = UIImage(systemName:"person.circle.fill")
+    static let search = UIImage(systemName:"magnifyingglass.circle.fill")
+    static let favoriteTabBar = UIImage(systemName:"star.circle.fill")
 }
 
 //MARK: - Enum for images

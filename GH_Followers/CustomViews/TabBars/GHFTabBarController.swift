@@ -22,7 +22,7 @@ class GHFTabBarController: UITabBarController {
         searchViewController.title = "Поиск"
         searchViewController.tabBarItem = UITabBarItem(
             title: "Поиск",
-            image: UIImage(systemName: "magnifyingglass.circle.fill"),
+            image: SFSymbols.search,
             tag: 0)
         
         return UINavigationController(rootViewController: searchViewController)
@@ -34,7 +34,7 @@ class GHFTabBarController: UITabBarController {
         favoritesViewController.title = "Избранное"
         favoritesViewController.tabBarItem = UITabBarItem(
             title: "Избранное",
-            image: UIImage(systemName: "star.circle.fill"),
+            image: SFSymbols.favoriteTabBar,
             tag: 1)
         
         return UINavigationController(rootViewController: favoritesViewController)

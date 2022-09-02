@@ -32,8 +32,15 @@ class GHFUserInfoHeaderViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubviews([
+            avatarImageView,
+            usernameLabel,
+            nameLabel,
+            locationImageView,
+            locationLabel,
+            bioLabel
+        ])
         configure()
-        addSubviews()
         layoutUI()
     }
     
@@ -56,18 +63,8 @@ class GHFUserInfoHeaderViewController: UIViewController {
         bioLabel.text = user.bio ?? "..."
         bioLabel.numberOfLines = 3
         
-        locationImageView.image = UIImage(systemName: SFSymbols.location)
+        locationImageView.image = SFSymbols.location
         locationImageView.tintColor = .secondaryLabel
-    }
-    
-    //Add subviews
-    private func addSubviews() {
-        view.addSubview(avatarImageView)
-        view.addSubview(usernameLabel)
-        view.addSubview(nameLabel)
-        view.addSubview(locationImageView)
-        view.addSubview(locationLabel)
-        view.addSubview(bioLabel)
     }
     
     //Layouts
@@ -103,7 +100,7 @@ class GHFUserInfoHeaderViewController: UIViewController {
             bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 12),
             bioLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bioLabel.heightAnchor.constraint(equalToConstant: 80)
+            bioLabel.heightAnchor.constraint(equalToConstant: 90)
         ])
     }
 }

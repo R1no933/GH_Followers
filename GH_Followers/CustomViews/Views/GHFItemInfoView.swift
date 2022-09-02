@@ -33,16 +33,16 @@ class GHFItemInfoView: UIView {
     func set(itemInfoType: ItemInfoType, withCount count: Int) {
         switch itemInfoType {
         case .repose:
-            symbolImageView.image = UIImage(systemName: SFSymbols.repose)
+            symbolImageView.image = SFSymbols.repose
             titleLabel.text = "Репозитории"
         case .gists:
-            symbolImageView.image = UIImage(systemName: SFSymbols.gists)
+            symbolImageView.image = SFSymbols.gists
             titleLabel.text = "Фрагменты"
         case .followers:
-            symbolImageView.image = UIImage(systemName: SFSymbols.followers)
+            symbolImageView.image = SFSymbols.followers
             titleLabel.text = "Подписчики"
         case .following:
-            symbolImageView.image = UIImage(systemName: SFSymbols.following)
+            symbolImageView.image = SFSymbols.following
             titleLabel.text = "Подписки"
         }
         
@@ -51,9 +51,11 @@ class GHFItemInfoView: UIView {
     
     //Configure view
     private func configure() {
-        addSubview(symbolImageView)
-        addSubview(titleLabel)
-        addSubview(countLabel)
+        addSubviews([
+            symbolImageView,
+            titleLabel,
+            countLabel
+        ])
         
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
         symbolImageView.contentMode = .scaleAspectFill

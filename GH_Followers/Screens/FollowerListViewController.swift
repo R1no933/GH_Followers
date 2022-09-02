@@ -7,11 +7,6 @@
 
 import UIKit
 
-//MARK: - Protocols
-protocol FollowerListViewControllerDelegate: AnyObject {
-    func didRequestFollowers(with username: String)
-}
-
 class FollowerListViewController: GHFDataLoadingViewController {
     
     //MARK: - Enum
@@ -22,6 +17,7 @@ class FollowerListViewController: GHFDataLoadingViewController {
     var page = 1
     var hasMoreFollowers = true
     var isSearching = false
+    var isLoadingMoreFollowers = false
     
     var followers: [Follower] = []
     var filteredFollowers: [Follower] = []
@@ -69,7 +65,6 @@ class FollowerListViewController: GHFDataLoadingViewController {
     private func configureSearchController() {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Кого ищем?"
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -79,6 +74,7 @@ class FollowerListViewController: GHFDataLoadingViewController {
     //Get followers 
     private func getFollowers(username: String, page: Int) {
         showLoadingView()
+        isLoadingMoreFollowers = true
         
         NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
             guard let self = self else { return }
@@ -100,6 +96,8 @@ class FollowerListViewController: GHFDataLoadingViewController {
             case.failure(let error):
                 self.presentAlertOnMainThread(title: "Что-то пошло не так.😱", message: error.rawValue, buttonTitle: "Понятно")
             }
+            
+            self.isLoadingMoreFollowers = false
         }
     }
     
@@ -171,7 +169,7 @@ extension FollowerListViewController: UICollectionViewDelegate {
         let height = scrollView.frame.size.height
         
         if offsetY > contentHeight - height {
-            guard hasMoreFollowers else { return }
+            guard hasMoreFollowers, !isLoadingMoreFollowers else { return }
             page += 1
             getFollowers(username: username, page: page)
         }
@@ -190,22 +188,22 @@ extension FollowerListViewController: UICollectionViewDelegate {
 }
 
 //Search controller result updater
-extension FollowerListViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension FollowerListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let filter = searchController.searchBar.text, !filter.isEmpty else { return }
+        guard let filter = searchController.searchBar.text, !filter.isEmpty else {
+            updateData(on: followers)
+            isSearching = false
+            return
+        }
+        
         isSearching = true
         filteredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
         updateData(on: filteredFollowers)
     }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        isSearching = false
-        updateData(on: followers)
-    }
 }
 
 //Delegate for request follower list
-extension FollowerListViewController: FollowerListViewControllerDelegate {
+extension FollowerListViewController: UserInfoViewControllerDelegate {
     func didRequestFollowers(with username: String) {
         self.username = username
         title = username
@@ -213,7 +211,7 @@ extension FollowerListViewController: FollowerListViewControllerDelegate {
         
         followers.removeAll()
         filteredFollowers.removeAll()
-        followerCollectionView.setContentOffset(.init(x: 0, y: -185), animated: true)
+        followerCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
         getFollowers(username: username, page: page)
     }
 }

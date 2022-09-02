@@ -7,6 +7,12 @@
 
 import UIKit
 
+//MARK: - Protocols
+protocol ItemInfoViewControllerDelegate: AnyObject {
+    func didTapedShowProfile(for user: User)
+    func didTapedShowFollowers(for user: User)
+}
+
 class GHFItemInfoViewController: UIViewController {
     
     //MARK: - Properties
@@ -15,7 +21,6 @@ class GHFItemInfoViewController: UIViewController {
     let secondItemInfoView = GHFItemInfoView()
     let actionButton = GHFButton()
     var user: User!
-    weak var delegate: UserInfoViewControllerDelegate!
     
     //MARK: - Inits
     init(user: User) {
@@ -58,8 +63,10 @@ class GHFItemInfoViewController: UIViewController {
     
     //Layout UI elements
     private func layout() {
-        view.addSubview(stackView)
-        view.addSubview(actionButton)
+        view.addSubviews([
+            stackView,
+            actionButton
+        ])
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         

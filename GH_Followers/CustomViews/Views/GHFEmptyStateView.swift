@@ -31,21 +31,33 @@ class GHFEmptyStateView: UIView {
     //MARK: - Methods
     //Configure view
     private func configure() {
-        addSubview(messageLabel)
-        addSubview(emptyStateImageView)
-        
+        addSubviews([
+            messageLabel,
+            emptyStateImageView
+        ])
+        configureMessageLabel()
+        configureImageView()
+    }
+    
+    //Configure message label
+    private func configureMessageLabel() {
         messageLabel.numberOfLines = 3
         messageLabel.textColor = .secondaryLabel
-        
-        emptyStateImageView.image = Images.emptyStateLogo
-        emptyStateImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -170),
             messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 45),
             messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -45),
-            messageLabel.heightAnchor.constraint(equalToConstant: 200),
-            
+            messageLabel.heightAnchor.constraint(equalToConstant: 200)
+        ])
+    }
+    
+    //Configure empty state image view
+    private func configureImageView() {
+        emptyStateImageView.image = Images.emptyStateLogo
+        emptyStateImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
             emptyStateImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
             emptyStateImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
             emptyStateImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 255),
