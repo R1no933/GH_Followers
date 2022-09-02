@@ -34,6 +34,12 @@ class GHFAllertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        view.addSubviews([
+            containerView,
+            titleLabel,
+            errorMessageLabel,
+            actionButton
+        ])
         configureContainerView()
         configureTitleLabel()
         configureButton()
@@ -47,7 +53,6 @@ class GHFAllertViewController: UIViewController {
     
     //MARK: - Layout container
     private func configureContainerView() {
-        view.addSubview(containerView)
 
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -59,7 +64,6 @@ class GHFAllertViewController: UIViewController {
     
     //MARK: - Layout elements in container
     private func configureTitleLabel() {
-        containerView.addSubview(titleLabel)
         titleLabel.text = alertTitle ?? "Ooopss😱"
         
         NSLayoutConstraint.activate([
@@ -71,7 +75,6 @@ class GHFAllertViewController: UIViewController {
     }
     
     private func configureMessageLabel() {
-        containerView.addSubview(errorMessageLabel)
         errorMessageLabel.text = errorMessage ?? "Невозможно выполнить запрос! Алярм!!!🫣"
         
         NSLayoutConstraint.activate([
@@ -83,7 +86,6 @@ class GHFAllertViewController: UIViewController {
     }
     
     private func configureButton() {
-        containerView.addSubview(actionButton)
         actionButton.setTitle(buttonTitle ?? "Ok", for: .normal)
         actionButton.addTarget(self, action: #selector(dismissAlertViewController), for: .touchUpInside)
         

@@ -9,10 +9,8 @@ import UIKit
 
 //MARK: - Protocols
 protocol UserInfoViewControllerDelegate: AnyObject {
-    func didTapedShowProfile(for user: User)
-    func didTapedShowFollowers(for user: User)
+    func didRequestFollowers(with username: String)
 }
-
 
 class UserInfoViewController: UIViewController {
     
@@ -23,7 +21,7 @@ class UserInfoViewController: UIViewController {
     let secondItemsView = UIView()
     var viewsArray: [UIView] = []
     let dateLabel = GHFBodyLabel(textAligment: .center)
-    weak var delegate: FollowerListViewControllerDelegate!
+    weak var delegate: UserInfoViewControllerDelegate!
      
     
     //MARK: - Lifecycle
@@ -66,14 +64,8 @@ class UserInfoViewController: UIViewController {
     
     //Configure child views
     private func configureViews(with user: User) {
-        let repoInfoViewController = GHFReposeItemViewController(user: user)
-        repoInfoViewController.delegate = self
-        
-        let followersItemViewCOntroller = GHFFollowersItemViewController(user: user)
-        followersItemViewCOntroller.delegate = self
-        
-        self.add(childViewController: repoInfoViewController, on: self.firstItemsView)
-        self.add(childViewController: followersItemViewCOntroller, on: self.secondItemsView)
+        self.add(childViewController: GHFReposeItemViewController(user: user, delegate: self), on: self.firstItemsView)
+        self.add(childViewController: GHFFollowersItemViewController(user: user, delegate: self), on: self.secondItemsView)
         self.add(childViewController: GHFUserInfoHeaderViewController(user: user), on: self.headerView)
         self.dateLabel.text = "Since at: \(user.createdAt.convertDateToString())"
     }
@@ -93,7 +85,7 @@ class UserInfoViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 200),
+            headerView.heightAnchor.constraint(equalToConstant: 220),
             
             firstItemsView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
             firstItemsView.heightAnchor.constraint(equalToConstant: 140),
@@ -102,7 +94,7 @@ class UserInfoViewController: UIViewController {
             secondItemsView.heightAnchor.constraint(equalToConstant: 140),
             
             dateLabel.topAnchor.constraint(equalTo: secondItemsView.bottomAnchor, constant: 20),
-            dateLabel.heightAnchor.constraint(equalToConstant: 18)
+            dateLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -113,7 +105,7 @@ class UserInfoViewController: UIViewController {
 }
 
 //MARK: - Extensions
-extension UserInfoViewController: UserInfoViewControllerDelegate {
+extension UserInfoViewController: GHFReposeItemViewControllerDelegate {
     //Taped show profile button
     func didTapedShowProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {
@@ -123,7 +115,9 @@ extension UserInfoViewController: UserInfoViewControllerDelegate {
         
         presentSafariViewController(with: url)
     }
-    
+}
+
+extension UserInfoViewController: GHFFollowersItemViewControllerDelegate {
     //Tapped show followers button
     func didTapedShowFollowers(for user: User) {
         guard user.followers != 0 else {

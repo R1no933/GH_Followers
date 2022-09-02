@@ -20,6 +20,11 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        view.addSubviews([
+            logoImageView,
+            userNameTextField,
+            getFollowersButton
+        ])
         configureLogoImageView()
         configureTextField()
         configureButton()
@@ -41,7 +46,6 @@ class SearchViewController: UIViewController {
     
     //Layouts
     private func configureLogoImageView() {
-        view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = Images.ghLogo
         
@@ -58,7 +62,6 @@ class SearchViewController: UIViewController {
     }
     
     private func configureTextField() {
-        view.addSubview(userNameTextField)
         userNameTextField.delegate = self
         
         NSLayoutConstraint.activate([
@@ -70,7 +73,6 @@ class SearchViewController: UIViewController {
     }
     
     private func configureButton() {
-        view.addSubview(getFollowersButton)
         getFollowersButton.addTarget(self, action: #selector(pushFolloweListViewControlloer), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
