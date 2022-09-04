@@ -40,7 +40,7 @@
 ![UserInfo](https://user-images.githubusercontent.com/104028198/188238716-de284fcc-8974-4cfd-b5d2-2f9a6eaf5d50.png) ![GitHubProfile](https://user-images.githubusercontent.com/104028198/188238730-208a45c1-cc17-467a-bf75-5c808f16b3e5.png) ![LoadingScreen](https://user-images.githubusercontent.com/104028198/188238933-5907fcd0-e59c-414f-8fb2-73127efeba35.png)
 
 # Итог:
-Данный проект был итогом проходжения курса Шона Аленв
+Данный проект был итогом проходжения курса Шона Алена
 Благодаря его курсу многие непонятные вещи стали предельно ясны. Появилась осознанность в работе в запросами, API, работа с памятью и верстка кодом. Таким
 образом я обзавелся первым готовым проектом, который станет отправной точкой в новой професси! Спасибо Шон!
 https://seanallen.teachable.com/p/take-home
